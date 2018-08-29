@@ -52,7 +52,7 @@ class App extends Component {
       !this.state.isAuthenticating &&
       <Grid>
         <Row>
-          <Col xs={4} md={16}>
+          <Col xs={2} md={2}>
           <Nav bsStyle="pills" stacked activeKey="1">
             <LinkContainer to="/">
               <NavItem eventKey="1" href="/">Home</NavItem>
@@ -61,7 +61,10 @@ class App extends Component {
               <NavItem eventKey="2" title="Item">Orders</NavItem>
             </LinkContainer>
             <LinkContainer to="/roasts">
-              <NavItem eventKey="2" title="Item">Roast</NavItem>
+              <NavItem eventKey="3" title="Item">Roast</NavItem>
+            </LinkContainer>
+            <LinkContainer to="/coffee">
+              <NavItem eventKey="4" title="Item">Coffee</NavItem>
             </LinkContainer>
             {this.state.isAuthenticated
               ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
