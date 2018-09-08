@@ -4,31 +4,21 @@ import { FilePicker } from 'react-file-picker'
 import { CsvToHtmlTable } from 'react-csv-to-table';
 import "./Orders.css";
 
-export default class Login extends Component {
+export default class Orders extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       sampleData: `
-      Model,mpg,cyl,disp,hp,drat,wt,qsec,vs,am,gear,carb
-      Mazda RX4,21,6,160,110,3.9,2.62,16.46,0,1,4,4
-      Mazda RX4 Wag,21,6,160,110,3.9,2.875,17.02,0,1,4,4
-      Datsun 710,22.8,4,108,93,3.85,2.32,18.61,1,1,4,1
-      Hornet 4 Drive,21.4,6,258,110,3.08,3.215,19.44,1,0,3,1
-      Hornet Sportabout,18.7,8,360,175,3.15,3.44,17.02,0,0,3,2
-      Valiant,18.1,6,225,105,2.76,3.46,20.22,1,0,3,1
-      Duster 360,14.3,8,360,245,3.21,3.57,15.84,0,0,3,4
-      Merc 240D,24.4,4,146.7,62,3.69,3.19,20,1,0,4,2
-      Merc 230,22.8,4,140.8,95,3.92,3.15,22.9,1,0,4,2
-      Merc 280,19.2,6,167.6,123,3.92,3.44,18.3,1,0,4,4
-      Merc 280C,17.8,6,167.6,123,3.92,3.44,18.9,1,0,4,4
-      Merc 450SE,16.4,8,275.8,180,3.07,4.07,17.4,0,0,3,3
-      Merc 450SL,17.3,8,275.8,180,3.07,3.73,17.6,0,0,3,3
-      Merc 450SLC,15.2,8,275.8,180,3.07,3.78,18,0,0,3,3
-      Cadillac Fleetwood,10.4,8,472,205,2.93,5.25,17.98,0,0,3,4
-      Lincoln Continental,10.4,8,460,215,3,5.424,17.82,0,0,3,4
-      Chrysler Imperial,14.7,8,440,230,3.23,5.345,17.42,0,0,3,4
-      Fiat 128,32.4,4,78.7,66,4.08,2.2,19.47,1,1,4,1
+      Order ID,Email,Financial Status,Paid at,Fulfillment Status,Fulfilled at,Currency,Subtotal,Shipping,Taxes,Amount Refunded,Total,Discount Code,Discount Amount,Shipping Method,Created at,Lineitem quantity,Lineitem name,Lineitem price,Lineitem sku,Lineitem variant,Lineitem requires shipping,Lineitem taxable,Lineitem fulfillment status,Billing Name,Billing Address1,Billing Address2,Billing City,Billing Zip,Billing Province,Billing Country,Billing Phone,Shipping Name,Shipping Address1,Shipping Address2,Shipping City,Shipping Zip,Shipping Province,Shipping Country,Shipping Phone,Cancelled at,Private Notes,Payment Method,Payment Reference
+      1,henrismail@gmail.com,PAID,7/25/2018 21:06,pending,,USD,20,10,0,0,30,,0,Flat rate,7/25/2018 21:06,1,Washed Colombian Coffee,10,SQ0509144,200g,TRUE,TRUE,pending,Henri Pietila,869 Lewis Avenue,,Sunnyvale,94086,CA,United States,,Henri Pietila,869 Lewis Avenue,,Sunnyvale,94086,CA,United States,,,,Stripe,ch_1Cs0jnLjGdjc8rbZ4qjuMRNp
+      1,,,,,,,,,,,,,,,,1,Washed Ethiopian Coffee,10,SQ0030016,200g,TRUE,TRUE,pending,,,,,,,,,,,,,,,,,,,,
+      3,cavepaintercoffee@gmail.com,PAID,8/4/2018 19:26,pending,,USD,240,0,0,0,240,,0,,8/4/2018 19:26,1,3 month subscription,240,SQ7673338,400g/2/Every other week,FALSE,TRUE,pending,Cave Painter,4848 Northeast 7th Avenue,,Portland,97211,OR,United States,,Cave Painter,,,,,,,,,,Stripe,ch_1CvbxKLjGdjc8rbZOw3r6oT0
+      4,cavepaintercoffee@gmail.com,PAID,8/4/2018 19:28,pending,,USD,40,10,0,0,50,,0,Flat rate,8/4/2018 19:28,1,Washed Colombian Coffee,10,SQ0509144,200g,TRUE,TRUE,pending,cave painter,4848 Northeast 7th Avenue,,Portland,97211,OR,United States,,cave painter,4848 Northeast 7th Avenue,,Portland,97211,OR,United States,,,,Stripe,ch_1CvbyjLjGdjc8rbZKEVHb7k7
+      4,,,,,,,,,,,,,,,,1,3 month subscription,30,SQ7103073,200g/1/Monthly,FALSE,TRUE,pending,,,,,,,,,,,,,,,,,,,,
+      2,hackjar2000@yahoo.com,refunded,7/25/2018 22:12,cancelled,,USD,10,10,0,20,20,,0,Flat rate,7/25/2018 22:12,1,Washed Guatemalan Coffee,10,SQ9095169,200g,TRUE,TRUE,cancelled,Dirk Orthmeyer,6819 SE Belmont St.,,Portland,97215,OR,United States,8583350579,Sirk Grigneyer,6819 SE Belmont St.,,Portland,97215,OR,United States,8583350579,7/26/2018 12:32,,Stripe,ch_1Cs1mILjGdjc8rbZPDKev2eP
+      ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+      ,,,,,,,,  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
       `
     };
   }
@@ -65,8 +55,6 @@ export default class Login extends Component {
           csvDelimiter=","
           tableClassName="table table-striped table-hover"
         />
-
-
       </div>
     );
   }

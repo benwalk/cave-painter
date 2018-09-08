@@ -20,8 +20,8 @@ export default class Home extends Component {
     }
 
     try {
-      const notes = await this.notes();
-      this.setState({ notes });
+      // const notes = await this.notes();
+      this.setState({ isAuthenticated: true });
     } catch (e) {
       alert(e);
     }
@@ -41,7 +41,7 @@ export default class Home extends Component {
   }
 
   renderLogin() {
-    return <Login />
+    this.props.history.push("/login")
   }
 
   render() {

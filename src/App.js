@@ -1,5 +1,5 @@
 // @flow
-import { Grid, Row, Col, Nav, NavItem, Image } from 'react-bootstrap';
+import { Grid, Row, Col, Nav, Navbar, NavItem, Image } from 'react-bootstrap';
 import React, { Component, Fragment } from 'react';
 import { Link, withRouter } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
@@ -50,39 +50,34 @@ class App extends Component {
 
     return (
       !this.state.isAuthenticating &&
-      <Grid>
-        <Row>
-          <Col xs={2} md={2}>
-          <Nav bsStyle="pills" stacked activeKey="1">
-            <LinkContainer to="/">
-              <NavItem eventKey="1" href="/">Home</NavItem>
-            </LinkContainer>
+      <div className="App container">
+        <Navbar fixedTop fluid collapseOnSelect>
+          <Navbar.Header>
+            <Navbar.Brand>
+            <Link to="/">Cave Painter Productions</Link>
+            </Navbar.Brand>
+            <Navbar.Toggle />
+          </Navbar.Header>
+          <Navbar.Collapse>
+          { this.state.isAuthenticated ?
+          <Nav>
             <LinkContainer to="/orders">
               <NavItem eventKey="2" title="Item">Orders</NavItem>
             </LinkContainer>
             <LinkContainer to="/roasts">
               <NavItem eventKey="3" title="Item">Roast</NavItem>
             </LinkContainer>
-            <LinkContainer to="/coffee">
-              <NavItem eventKey="4" title="Item">Coffee</NavItem>
-            </LinkContainer>
-            {this.state.isAuthenticated
-              ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
-              : <Fragment>
-                  <LinkContainer to="/login">
-                    <NavItem>Login</NavItem>
-                  </LinkContainer>
-                </Fragment>
-            }
+            <NavItem onClick={this.handleLogout}>Logout</NavItem>
           </Nav>
-          </Col>
-          <Col xs={6} md={4}>
-          <div className="App container">
-            <Routes childProps={childProps} />
-          </div>
-          </Col>
-        </Row>
-      </Grid>
+          :
+          <Nav>
+
+          </Nav>
+          }
+          </Navbar.Collapse>
+        </Navbar>
+        <Routes childProps={childProps} />
+      </div>
     );
   }
 }
