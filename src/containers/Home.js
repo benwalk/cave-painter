@@ -1,8 +1,6 @@
 // @flow
 import React, { Component } from "react";
-import { PageHeader, ListGroup } from "react-bootstrap";
 import "./Home.css";
-import Login from "./Login";
 
 export default class Home extends Component {
   constructor(props) {
@@ -16,7 +14,7 @@ export default class Home extends Component {
 
   async componentDidMount() {
     if (!this.props.isAuthenticated) {
-      return;
+      this.renderLogin();
     }
 
     try {

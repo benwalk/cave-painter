@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import { FilePicker } from 'react-file-picker'
+import { Button } from "react-bootstrap";
 import { CsvToHtmlTable } from 'react-csv-to-table';
 import "./Orders.css";
 
@@ -21,6 +20,12 @@ export default class Orders extends Component {
       ,,,,,,,,  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
       `
     };
+  }
+
+  async componentDidMount() {
+    if (!this.props.isAuthenticated) {
+      this.props.history.push("/login");
+    }
   }
 
   validateForm() {

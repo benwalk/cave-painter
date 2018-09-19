@@ -1,6 +1,6 @@
 // @flow
-import { Grid, Row, Col, Nav, Navbar, NavItem, Image } from 'react-bootstrap';
-import React, { Component, Fragment } from 'react';
+import { Grid, Row, Col, Nav, Navbar, NavItem } from 'react-bootstrap';
+import React, { Component } from 'react';
 import { Link, withRouter } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import Routes from "./Routes";
@@ -13,7 +13,8 @@ class App extends Component {
     super(props);
 
     this.state = {
-      isAuthenticated: false
+      isAuthenticated: false,
+      isAuthenticating: true
     };
   }
 
@@ -62,21 +63,34 @@ class App extends Component {
           { this.state.isAuthenticated ?
           <Nav>
             <LinkContainer to="/orders">
-              <NavItem eventKey="2" title="Item">Orders</NavItem>
+              <NavItem eventKey="1" title="Item">Orders</NavItem>
             </LinkContainer>
             <LinkContainer to="/roasts">
-              <NavItem eventKey="3" title="Item">Roast</NavItem>
+              <NavItem eventKey="2" title="Item">Roast</NavItem>
+            </LinkContainer>
+            <LinkContainer to="/coffee">
+              <NavItem eventKey="3" title="Item">Coffee</NavItem>
             </LinkContainer>
             <NavItem onClick={this.handleLogout}>Logout</NavItem>
           </Nav>
           :
           <Nav>
-
+            <LinkContainer to="/login">
+              <NavItem title="Item">Login</NavItem>
+            </LinkContainer>
           </Nav>
           }
           </Navbar.Collapse>
         </Navbar>
-        <Routes childProps={childProps} />
+        <Grid>
+          <Row>
+            <Col sm={3} md={2}>
+            </Col>
+            <Col sm={9} smOffset={3} md={10} mdOffset={2}>
+              <Routes childProps={childProps} />
+            </Col>
+          </Row>
+        </Grid>
       </div>
     );
   }
