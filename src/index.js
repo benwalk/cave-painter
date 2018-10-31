@@ -1,14 +1,16 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import $ from 'jquery';
+// import Popper from 'popper.js';
+// import 'bootstrap/dist/js/bootstrap.bundle.min';
 // Put any other imports below so that CSS from your
 // components takes precedence over default styles.
+import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from "react-router-dom";
-import './index.css';
-import App from './App';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Amplify from 'aws-amplify';
 import registerServiceWorker from './registerServiceWorker';
-import Amplify from "aws-amplify";
+import App from './App';
 import config from "./config";
 
 Amplify.configure({

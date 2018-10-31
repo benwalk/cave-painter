@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Button } from "react-bootstrap";
 import { CsvToHtmlTable } from 'react-csv-to-table';
 import "./Orders.css";
 
@@ -28,6 +27,8 @@ export default class Orders extends Component {
     }
   }
 
+
+
   validateForm() {
     return this.state;
   }
@@ -45,16 +46,7 @@ export default class Orders extends Component {
   render() {
     return (
       <div className="Orders">
-        <form onSubmit={this.handleSubmit}>
-          <Button
-            block
-            bsSize="large"
-            disabled={!this.validateForm()}
-            type="submit"
-          >
-            Load Data
-          </Button>
-        </form>
+
         <CsvToHtmlTable
           data={this.state.sampleData}
           csvDelimiter=","

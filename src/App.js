@@ -1,11 +1,9 @@
-// @flow
-import { Grid, Row, Col, Nav, Navbar, NavItem } from 'react-bootstrap';
+import { Container, Row, Col, Navbar, NavbarBrand, Nav, NavItem, NavLink, Collapse } from 'reactstrap';
 import React, { Component } from 'react';
-import { Link, withRouter } from "react-router-dom";
-import { LinkContainer } from "react-router-bootstrap";
 import Routes from "./Routes";
 import "./App.css";
 import { Auth } from "aws-amplify";
+import BrandLogo from './components/BrandLogo';
 
 class App extends Component {
 
@@ -51,49 +49,39 @@ class App extends Component {
 
     return (
       !this.state.isAuthenticating &&
-      <div className="App container">
-        <Navbar fixedTop fluid collapseOnSelect>
-          <Navbar.Header>
-            <Navbar.Brand>
-            <Link to="/">Cave Painter Productions</Link>
-            </Navbar.Brand>
-            <Navbar.Toggle />
-          </Navbar.Header>
-          <Navbar.Collapse>
-          { this.state.isAuthenticated ?
-          <Nav>
-            <LinkContainer to="/orders">
-              <NavItem eventKey="1" title="Item">Orders</NavItem>
-            </LinkContainer>
-            <LinkContainer to="/roasts">
-              <NavItem eventKey="2" title="Item">Roast</NavItem>
-            </LinkContainer>
-            <LinkContainer to="/coffee">
-              <NavItem eventKey="3" title="Item">Coffee</NavItem>
-            </LinkContainer>
-            <NavItem onClick={this.handleLogout}>Logout</NavItem>
+      <div className="App">
+        <Navbar light className="bg-light" fixed="top" expand="lg">
+          <NavbarBrand href="/">
+            <BrandLogo />
+            Cave Painter Productions
+          </NavbarBrand>
+          <Collapse navbar>
+        {
+          this.state.isAuthenticated ?
+          <Nav navbar>
+            <NavItem><NavLink href="/orders" active>Orders</NavLink></NavItem>
+            <NavItem><NavLink href="/roasts">Roasts</NavLink></NavItem>
+            <NavItem><NavLink href="/coffee">Coffee</NavLink></NavItem>
+            <NavItem onClick={this.handleLogout}><NavLink href="/logout">Logout</NavLink></NavItem>
           </Nav>
-          :
+        :
           <Nav>
-            <LinkContainer to="/login">
-              <NavItem title="Item">Login</NavItem>
-            </LinkContainer>
+            <NavItem><NavLink href="/login">Login</NavLink></NavItem>
           </Nav>
-          }
-          </Navbar.Collapse>
+        }
+</Collapse>
         </Navbar>
-        <Grid>
+
+        <Container fluid>
           <Row>
-            <Col sm={3} md={2}>
-            </Col>
-            <Col sm={9} smOffset={3} md={10} mdOffset={2}>
+            <Col sm={9} md={12}>
               <Routes childProps={childProps} />
             </Col>
           </Row>
-        </Grid>
+        </Container>
       </div>
     );
   }
 }
 
-export default withRouter(App);
+export default App;

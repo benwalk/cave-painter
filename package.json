@@ -4,22 +4,27 @@
   "private": true,
   "dependencies": {
     "aws-amplify": "^1.0.8",
-    "bootstrap": "^3.3.7",
-    "react": "^16.4.2",
-    "react-bootstrap": "^0.32.3",
+    "bootstrap": "^4.1.3",
+    "bootswatch": "^4.1.3",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.4",
+    "react": "^16.5.2",
     "react-csv-to-table": "0.0.1",
-    "react-dom": "^16.4.2",
-    "react-file-picker": "0.0.5",
+    "react-dom": "^16.5.2",
     "react-router-bootstrap": "^0.24.4",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4"
+    "react-scripts": "^1.1.4",
+    "reactstrap": "^6.5.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "flow": "flow"
+    "flow": "flow",
+    "predeploy": "npm run build",
+    "deploy": "aws s3 sync build/ s3://cave-painter-client --delete",
+    "postdeploy": "aws cloudfront create-invalidation --distribution-id YOUR_CF_DISTRIBUTION_ID --paths '/*' && aws cloudfront create-invalidation --distribution-id YOUR_WWW_CF_DISTRIBUTION_ID --paths '/*'"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

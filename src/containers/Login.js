@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {  FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import {  Form, FormGroup, Label, Input } from "reactstrap";
 import LoaderButton from "../components/LoaderButton";
 import "./Login.css";
 import { Auth } from "aws-amplify";
@@ -41,34 +41,35 @@ export default class Login extends Component {
   render() {
     return (
       <div className="Login">
-      <form onSubmit={this.handleSubmit}>
-        <FormGroup controlId="email" bsSize="large">
-          <ControlLabel>Email</ControlLabel>
-          <FormControl
-            autoFocus
-            type="email"
-            value={this.state.email}
-            onChange={this.handleChange}
-          />
-        </FormGroup>
-        <FormGroup controlId="password" bsSize="large">
-          <ControlLabel>Password</ControlLabel>
-          <FormControl
-            value={this.state.password}
-            onChange={this.handleChange}
-            type="password"
-          />
-        </FormGroup>
-          <LoaderButton
-            block
-            bsSize="large"
-            disabled={!this.validateForm()}
-            type="submit"
-            isLoading={this.state.isLoading}
-            text="Login"
-            loadingText="Logging in…"
+        <Form onSubmit={this.handleSubmit}>
+          <FormGroup >
+            <Label for="email">Email</Label>
+            <Input
+              autoFocus
+              type="email"
+              id="email"
+              value={this.state.email}
+              onChange={this.handleChange}
             />
-      </form>
+          </FormGroup>
+          <FormGroup >
+            <Label for="password">Password</Label>
+            <Input
+              id="password"
+              value={this.state.password}
+              onChange={this.handleChange}
+              type="password"
+            />
+          </FormGroup>
+            <LoaderButton
+              block
+              disabled={!this.validateForm()}
+              type="submit"
+              isLoading={this.state.isLoading}
+              text="Login"
+              loadingText="Logging in…"
+              />
+        </Form>
       </div>
     );
   }

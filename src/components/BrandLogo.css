@@ -1,0 +1,9 @@
+.BrandLogo {
+  margin-right: 5px;
+  height: 25px;
+  width: 25px;
+}
+@keyframes spin {
+  from { transform: scale(1) rotate(0deg); }
+  to { transform: scale(1) rotate(360deg); }
+}
