@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Button, ButtonToolbar, Card, CardHeader, CardBody, CardTitle, CardText, CardFooter, CardImg, CardSubtitle } from "reactstrap";
+import { Container, Row, Col, Button, Card, CardBody, CardTitle, CardText, CardImg, CardSubtitle } from "reactstrap";
 
 export default class Coffee extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ export default class Coffee extends Component {
       this.props.history.push("/login");
     }
   }
-  
+
   handleNew = event => {
     this.props.history.push("/coffee/new");
   }
