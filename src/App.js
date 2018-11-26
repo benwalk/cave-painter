@@ -1,4 +1,4 @@
-import { Container, Row, Col, Navbar, NavbarBrand, Nav, NavItem, NavLink, Collapse } from 'reactstrap';
+import { Container, Row, Col, Navbar, NavbarBrand, Nav, NavItem, NavLink, Collapse, UncontrolledDropdown, DropdownMenu, DropdownItem, DropdownToggle } from 'reactstrap';
 import React, { Component } from 'react';
 import Routes from "./Routes";
 import "./App.css";
@@ -12,7 +12,8 @@ class App extends Component {
 
     this.state = {
       isAuthenticated: false,
-      isAuthenticating: true
+      isAuthenticating: true,
+      dropdownOpen: false
     };
   }
 
@@ -41,6 +42,12 @@ class App extends Component {
     this.props.history.push("/login");
   }
 
+  toggle() {
+    this.setState = {
+      dropdownOpen: !this.state.dropdownOpen
+    }
+  }
+
   render() {
     const childProps = {
       isAuthenticated: this.state.isAuthenticated,
@@ -59,9 +66,51 @@ class App extends Component {
         {
           this.state.isAuthenticated ?
           <Nav navbar>
-            <NavItem><NavLink href="/orders" active>Orders</NavLink></NavItem>
-            <NavItem><NavLink href="/roasts">Roasts</NavLink></NavItem>
-            <NavItem><NavLink href="/coffee">Coffee</NavLink></NavItem>
+            <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Orders
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem href="/orders">
+                    Dashboard
+                  </DropdownItem>
+                  <DropdownItem href="/orders/new">
+                    New Order
+                  </DropdownItem>
+                  <DropdownItem href="/orders/fulfilled">
+                    Fulfilled
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Roasts
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem href="/roasts">
+                    Dashboard
+                  </DropdownItem>
+                  <DropdownItem href="/roasts/notes/new">
+                    New Roast
+                  </DropdownItem>
+                  <DropdownItem href="/roasts/notes">
+                    Add Cupping Notes
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+              <UncontrolledDropdown nav inNavbar>
+                  <DropdownToggle nav caret>
+                    Coffee
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <DropdownItem href="/coffee">
+                      Overview
+                    </DropdownItem>
+                    <DropdownItem href="/coffee/new">
+                      Add Inventory
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
             <NavItem onClick={this.handleLogout}><NavLink href="/logout">Logout</NavLink></NavItem>
           </Nav>
         :
