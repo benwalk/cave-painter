@@ -9,7 +9,7 @@ export default class Login extends Component {
     super(props);
 
     this.state = {
-      isLoading: false,
+      loading: false,
       email: "",
       password: ""
     };
@@ -27,14 +27,14 @@ export default class Login extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    this.setState({ isLoading: true });
+    this.setState({ loading: true });
     try {
       await Auth.signIn(this.state.email, this.state.password);
       this.props.userHasAuthenticated(true);
       this.props.history.push("/");
     } catch (e) {
       alert(e.message);
-      this.setState({ isLoading: false });
+      this.setState({ loading: false });
     }
   }
 
@@ -65,8 +65,8 @@ export default class Login extends Component {
               block
               disabled={!this.validateForm()}
               type="submit"
-              isLoading={this.state.isLoading}
               text="Login"
+              loading={this.state.loading}
               loadingText="Logging in…"
               />
         </Form>

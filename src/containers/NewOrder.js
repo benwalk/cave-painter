@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Container, Form, FormGroup, Label, Input, Button, ListGroup, ListGroupItem, Card, CardBody, CardTitle, CardSubtitle, CardText, CardColumns } from "reactstrap";
-// import LoaderButton from "../components/LoaderButton";
+import { Container, Row, Col, Form, FormGroup, Label, Input, Button, ListGroup, ListGroupItem, Card, CardBody, CardTitle, CardSubtitle, CardText, CardColumns } from "reactstrap";
+import LoaderButton from "../components/LoaderButton";
 import config from "../config";
 import "./NewOrder.css";
 
@@ -11,7 +11,7 @@ export default class NewOrder extends Component {
     this.file = null;
 
     this.state = {
-      isLoading: null,
+      loading: false,
       content: ""
     };
   }
@@ -32,26 +32,26 @@ export default class NewOrder extends Component {
     });
   }
 
-  handleFileChange = event => {
-    this.file = event.target.files[0];
-  }
-
   handleSubmit = async event => {
     event.preventDefault();
-
-    this.setState({ isLoading: true });
+    this.setState({ loading: true });
+    // window.location.reload(); 
   }
 
   render() {
     return (
-      <div>
         <Container>
           <h2>Enter New Order</h2>
-          <Form tag="fieldset">
+          <Form onSubmit={this.handleSubmit} >
             {/* reactstrap way to do this */}
-            <h5 for="existingCustomer">Choose existing customer</h5>
+            <h5>Choose existing customer</h5>
             <FormGroup>
-              <Input type="select" id="existingCustomer" name="existingCustomer">
+              <Input
+                type="select"
+                id="existingCustomer"
+                name="existingCustomer"
+                value={this.state.existingCustomer}
+                onChange={this.handleChange}>
                 <option>Taylor</option>
                 <option>Dan</option>
                 <option>Dirk</option>
@@ -59,10 +59,16 @@ export default class NewOrder extends Component {
             </FormGroup>
 
             <h5> Or, fill out new customer information</h5>
+            <Row>
+            <Col><FormGroup>
+              <Label for="name">Name</Label>
+              <Input type="text" id="name" placeholder="first last" />
+            </FormGroup>
             <FormGroup>
-              <Label for="email">Email</Label>
+              <Label for="email">Contact Email</Label>
               <Input type="email" id="email" placeholder="email@example.com" />
             </FormGroup>
+            </Col><Col>
             <FormGroup>
               <Label for="address">Shipping Address</Label>
               <Input type="text" id="address-street" name="address" placeholder="street" />
@@ -70,30 +76,40 @@ export default class NewOrder extends Component {
               <Input type="text" id="address-state" name="address" placeholder="state" />
               <Input type="text" id="address-zip" name="address" placeholder="zip" />
             </FormGroup>
+            </Col>
+            </Row>
 
             <h5>Add items</h5>
-            <FormGroup>
+            <Row><Col><FormGroup>
               <Label for="product">Coffee</Label>
               <Input type="select" id="product" name="product">
                 <option>Washed Colombian Coffee</option>
                 <option>Washed Ethiopian Coffee</option>
                 <option>Washed Guatemalan Coffee</option>
               </Input>
+              </FormGroup></Col>
+              <Col><FormGroup>
               <Label for="product-amount">Amount</Label>
               <Input type="select" id="product-amount" name="product-amount">
                 <option>200g</option>
                 <option>400g</option>
                 <option>1000g</option>
               </Input>
-              <Label for="product-frequency">Amount</Label>
+              </FormGroup>
+              </Col>
+              <Col>
+              <FormGroup>
+              <Label for="product-frequency">Frequency</Label>
               <Input type="select" id="product-amount" name="product-amount">
                 <option>Once</option>
                 <option>Every Week</option>
                 <option>Every Two Weeks</option>
                 <option>Every Month</option>
               </Input>
-              <Button>Add</Button>
-            </FormGroup>
+              </FormGroup></Col><Col><FormGroup>
+              <Label for="button"></Label>
+              <div><Button>Add</Button></div></FormGroup></Col>
+            </Row>
 
             <h5>Order Summary</h5>
             <ListGroup>
@@ -105,13 +121,17 @@ export default class NewOrder extends Component {
               <ListGroupItem><p>Washed Columbian Coffee - 200g</p><small>Every Two Weeks</small><Button color="danger" className="float-right">Remove</Button></ListGroupItem>
             </ListGroup>
 
-
-            {/* bootstrap way to do this */}
-
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <h5 />
+            <LoaderButton
+              block
+              disabled={!this.validateForm()}
+              type="submit"
+              text="Create"
+              loading={this.state.loading}
+              loadingText="Loading…"
+              />
         </Form>
         </Container>
-      </div>
     );
   }
 }
