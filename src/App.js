@@ -90,10 +90,10 @@ class App extends Component {
                   <DropdownItem href="/roasts">
                     Dashboard
                   </DropdownItem>
-                  <DropdownItem href="/roasts/notes/new">
+                  <DropdownItem href="/roasts/new">
                     New Roast
                   </DropdownItem>
-                  <DropdownItem href="/roasts/notes">
+                  <DropdownItem href="/roasts/notes/new">
                     Add Cupping Notes
                   </DropdownItem>
                 </DropdownMenu>
