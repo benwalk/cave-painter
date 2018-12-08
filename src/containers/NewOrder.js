@@ -35,13 +35,13 @@ export default class NewOrder extends Component {
   handleSubmit = async event => {
     event.preventDefault();
     this.setState({ loading: true });
-    // window.location.reload(); 
+    // window.location.reload();
   }
 
   render() {
     return (
         <Container>
-          <h2>Enter New Order</h2>
+          <h2>Place Order</h2>
           <Form onSubmit={this.handleSubmit} >
             {/* reactstrap way to do this */}
             <h5>Choose existing customer</h5>
@@ -106,9 +106,9 @@ export default class NewOrder extends Component {
                 <option>Every Two Weeks</option>
                 <option>Every Month</option>
               </Input>
-              </FormGroup></Col><Col><FormGroup>
-              <Label for="button"></Label>
-              <div><Button>Add</Button></div></FormGroup></Col>
+              </FormGroup></Col><Col className="align-self-center">
+                <Button >Add</Button>
+              </Col>
             </Row>
 
             <h5>Order Summary</h5>
@@ -126,9 +126,9 @@ export default class NewOrder extends Component {
               block
               disabled={!this.validateForm()}
               type="submit"
-              text="Create"
+              text="Save"
               loading={this.state.loading}
-              loadingText="Loading…"
+              loadingText="Placing order…"
               />
         </Form>
         </Container>

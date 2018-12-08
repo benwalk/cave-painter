@@ -75,7 +75,7 @@ class App extends Component {
                     Dashboard
                   </DropdownItem>
                   <DropdownItem href="/orders/new">
-                    New Order
+                    Place Order
                   </DropdownItem>
                   <DropdownItem href="/orders/fulfilled">
                     Fulfilled

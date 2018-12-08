@@ -1,5 +1,4 @@
-export default {
-  MAX_ATTACHMENT_SIZE: 5000000,
+const dev = {
   s3: {
     REGION: "us-west-2",
     BUCKET: "cave-painter-client-attachments"
@@ -14,4 +13,32 @@ export default {
     APP_CLIENT_ID: "5qngiohd76q80mrflfmf02cg74",
     IDENTITY_POOL_ID: "b9d3ae21-62f4-400b-b97a-f2441591a251"
   }
+};
+
+const prod = {
+  s3: {
+    REGION: "YOUR_PROD_S3_UPLOADS_BUCKET_REGION",
+    BUCKET: "YOUR_PROD_S3_UPLOADS_BUCKET_NAME"
+  },
+  apiGateway: {
+    REGION: "YOUR_PROD_API_GATEWAY_REGION",
+    URL: "YOUR_PROD_API_GATEWAY_URL"
+  },
+  cognito: {
+    REGION: "YOUR_PROD_COGNITO_REGION",
+    USER_POOL_ID: "YOUR_PROD_COGNITO_USER_POOL_ID",
+    APP_CLIENT_ID: "YOUR_PROD_COGNITO_APP_CLIENT_ID",
+    IDENTITY_POOL_ID: "YOUR_PROD_IDENTITY_POOL_ID"
+  }
+};
+
+// Default to dev if not set
+const config = process.env.REACT_APP_STAGE === 'prod'
+  ? prod
+  : dev;
+
+export default {
+  // Add common config values here
+  MAX_ATTACHMENT_SIZE: 5000000,
+  ...config
 };
