@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { API } from "aws-amplify";
 import { Container, Row, Col, Form, FormGroup, Label, Input, Button, ListGroup, ListGroupItem, Card, CardBody, CardTitle, CardSubtitle, CardText, CardColumns } from "reactstrap";
 import LoaderButton from "../components/LoaderButton";
 import config from "../config";
@@ -8,11 +9,17 @@ export default class NewOrder extends Component {
   constructor(props) {
     super(props);
 
-    this.file = null;
-
     this.state = {
       loading: false,
-      content: ""
+      customer: {
+        name: "",
+        email: "",
+        addressStreet: "",
+        addressCity: "",
+        addressState: "",
+        addressZip: "",
+      },
+      items: []
     };
   }
 
@@ -22,8 +29,14 @@ export default class NewOrder extends Component {
     }
   }
 
+  creatOrder(order) {
+    return API.post("orders", "/orders", {
+      body: order
+    });
+  }
+
   validateForm() {
-    return this.state.content.length > 0;
+    return this.state.loading;
   }
 
   handleChange = event => {
@@ -35,7 +48,17 @@ export default class NewOrder extends Component {
   handleSubmit = async event => {
     event.preventDefault();
     this.setState({ loading: true });
-    // window.location.reload();
+
+    try {
+      await this.creatOrder({
+        customer: this.state.customer,
+        items: this.state.items
+      });
+      this.props.history.push("/");
+    } catch (e) {
+      alert(e);
+      this.setState({ isLoading: false });
+    }
   }
 
   render() {
@@ -71,10 +94,10 @@ export default class NewOrder extends Component {
             </Col><Col>
             <FormGroup>
               <Label for="address">Shipping Address</Label>
-              <Input type="text" id="address-street" name="address" placeholder="street" />
-              <Input type="text" id="address-city" name="address" placeholder="city" />
-              <Input type="text" id="address-state" name="address" placeholder="state" />
-              <Input type="text" id="address-zip" name="address" placeholder="zip" />
+              <Input type="text" id="addressStreet" name="addressStreet" placeholder="street" />
+              <Input type="text" id="addressCity" name="addressCity" placeholder="city" />
+              <Input type="text" id="addressState" name="addressState" placeholder="state" />
+              <Input type="text" id="addressZip" name="addressZip" placeholder="zip" />
             </FormGroup>
             </Col>
             </Row>
